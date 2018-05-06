@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+    <!-- 应用的名称 -->
+    <dubbo:application name="webcommon" owner="provider" />
+    <!-- 指定注册中心 -->
+    <dubbo:registry protocol="zookeeper" address="127.0.0.1:2181" />
+
+    <!-- 当前服务的端口 -->
+    <dubbo:protocol name="dubbo" port="20880" />
+
+    <!-- 干掉超时重试机制 -->
+    <dubbo:provider delay="-1" timeout="6000" retries="0" />
+
+    <!-- service implementation, as same as regular local bean -->
+    <bean id="commonInterface" class="com.base.service.impl.CommonImpl"/>
+    <!-- 需要暴露的服务 -->
+    <dubbo:service timeout="6000"
+                   interface="com.puao.datamodel.ICommonInterface" ref="commonInterface"
+                   version="1.0.0" />
+</beans>

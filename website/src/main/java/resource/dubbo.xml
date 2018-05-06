@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+    <!-- 应用的名称 -->
+    <dubbo:application name="webcommon" owner="website" />
+    <!-- 指定注册中心 -->
+    <dubbo:registry protocol="zookeeper" address="127.0.0.1:2181" />
+    <!-- 当前服务的端口 -->
+    <dubbo:protocol name="dubbo" port="20880" />
+
+    <!-- 干掉超时重试机制 -->
+    <dubbo:provider delay="-1" timeout="6000" retries="0" />
+
+
+    <!-- 需要调用的服务 -->
+    <dubbo:reference timeout="6000" id="commonInterface"
+                     interface="com.puao.datamodel.ICommonInterface" version="1.0.0" />
+</beans>
