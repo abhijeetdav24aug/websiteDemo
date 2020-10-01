@@ -1,4 +1,4 @@
-# work
+# work--An Amazing Project
 
 #### 项目介绍
 项目springmvc+spring+mybaits,数据库用psotgresql，采用了dubbo，现在正在搭建，现目前问题，后台service能调用，但是数据库查不出数据
